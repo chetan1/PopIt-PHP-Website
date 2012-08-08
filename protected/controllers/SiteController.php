@@ -81,12 +81,12 @@ class SiteController extends Controller
 		$this->render('contact',array('model'=>$model));
 	}
 
-    public function actionSync()
+    protected function actionSync()
     {
         Prs::sync();
     }
 
-    public function actionEmpty()
+    protected function actionEmpty()
     {
         $popit = Prs::init();
         $popit->emptyInstance();
