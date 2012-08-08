@@ -118,10 +118,16 @@ class People extends CActiveRecord
         return $criteria;
     }
 
+    public static function getSyncFields()
+    {
+        return array('house', 'state', 'party', 'education', 'educationDetails', 'constituency', 'age', 'gender', 'debates', 'bills', 'questions', 'attendance', 'termStart', 'termEnd', 'nature');
+    }
+
     public static function getSearchFields()
     {
         return array('name', 'house', 'state', 'party', 'education', 'educationDetails');;
     }
+
 
     public function stats($house = 0, $stat, $order = "ASC")
     {
@@ -166,7 +172,7 @@ class People extends CActiveRecord
 
     public function getExtraData()
     {
-        $fields = self::getSearchFields();
+        $fields = self::getSyncFields();
         $result = array();
 
         foreach($fields as $f)

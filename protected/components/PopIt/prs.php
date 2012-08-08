@@ -62,7 +62,13 @@ class Prs{
     public static function search($q)
     {
         $popit = self::init();
-        return $popit->search($q);
+        $result = $popit->search($q);
+        return $result['results'];
     }
-    
+
+    public static function getPersonLink($slug)
+    {
+        return "http://" . Yii::app()->params['PopIt']['instanceName'] . "." . Yii::app()->params['PopIt']['hostName'] . "/person/" . $slug;
+    }
+
 }

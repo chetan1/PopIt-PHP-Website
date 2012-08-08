@@ -41,7 +41,7 @@ class SiteController extends Controller
         {
             $results = Prs::search($query);
             $this->render('search',array(
-                    'result'=>$results['results'],
+                    'result'=>$results,
                     'query'=>$query,
             ));
         }
@@ -81,11 +81,15 @@ class SiteController extends Controller
 		$this->render('contact',array('model'=>$model));
 	}
 
-
-
     public function actionSync()
     {
         Prs::sync();
+    }
+
+    public function actionEmpty()
+    {
+        $popit = Prs::init();
+        $popit->emptyInstance();
     }
 
     public function actionKeywords()
@@ -97,13 +101,14 @@ class SiteController extends Controller
     {
         if(isset($_GET['q']) && ($keyword=trim($_GET['q']))!=='')
         {
-            $keywords = Keyword::model()->findAll('keyword LIKE :query', array(':query'=>"%{$_GET['q']}%"));
+            $query = Prs::search($_GET['q']);
+//            $keywords = Keyword::model()->findAll('keyword LIKE :query', array(':query'=>"%{$_GET['q']}%"));
             $result = array();
 
-            if(count($keywords) > 0)
+            if(count($query) > 0)
             {
-                foreach($keywords as $k)
-                    $result[] = $k->keyword;
+                foreach($query as $k)
+                    $result[] = $k['name'];
 
                 echo implode("\n",$result);
             }
@@ -116,7 +121,9 @@ class SiteController extends Controller
         {
             $id = $_GET['id'];
             $instance = Prs::init();
-            $person = $instance->get('person', $id);
+            $result = $instance->get('person', $id);
+            $person = (array)$result['result'];
+            $person['summary'] = (array)json_decode($person['summary']);
             $this->render('person', array('person' => $person));
         }
     }
