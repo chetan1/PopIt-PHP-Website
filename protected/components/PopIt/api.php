@@ -180,7 +180,7 @@ class PopItAPI
 
     $opts[CURLOPT_URL] = $url;
     curl_setopt_array($ch, $opts);
-    echo $url;
+
     $result = curl_exec($ch);
     
 //    $response = curl_getinfo($ch);

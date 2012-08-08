@@ -2,14 +2,16 @@
 
 class Prs{
 
+    public static function init()
+    {
+        return new PopIt(Yii::app()->params['PopIt']);
+    }
+
     public static function sync()
     {
-        $popit = new PopIt(Yii::app()->params['PopIt']);
-
+        $popit = self::init();
         $people = People::model()->findAll();
         $storedData = self::getStoredData($popit);
-//        $popit->emptyInstance();
-//        die();
         
         foreach($people as $p)
         {
@@ -37,8 +39,8 @@ class Prs{
                 'organisation' => $orgId,
             ));
         }
-
     }
+
 
     protected static function getStoredData($popit)
     {
@@ -59,7 +61,8 @@ class Prs{
 
     public static function search($q)
     {
-        
+        $popit = self::init();
+        return $popit->search($q);
     }
     
 }

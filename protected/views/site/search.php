@@ -4,13 +4,13 @@
         <div class="hero-unit">
             <h2>You searched for "<?= $query ?>"</h2><br />
             <div id="search-results">
-                <?php $this->widget('zii.widgets.CListView', array(
-                        'dataProvider'=>$dataProvider,
-                        'itemView'=>'_searchListView',
-                        'template'=>'{summary}{items}<div class="clear"></div><br />{pager}',
-                        'emptyText'=>'<br /><div>No results found.</div>',
-                        'ajaxUpdate'=>true,
-                )); ?>
+                <?php foreach($result as $r): ?>
+                    <li>
+                        <a href="<?= $this->createAbsoluteUrl('site/person', array('id' => $r['_id'], 'name' => $r['name'])) ?>">
+                            <?= $r['name'] ?>
+                        </a>
+                    </li>
+                <? endforeach; ?>
             </div>
         </div>
     </div>

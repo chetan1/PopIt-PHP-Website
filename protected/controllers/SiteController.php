@@ -36,19 +36,12 @@ class SiteController extends Controller
         
         $query = mysql_escape_string($_GET['q']);
 
+
         if($query != '')
         {
-            $criteria=People::model()->search($query);
-
-            $dataProvider=new CActiveDataProvider(People::model(),
-                array(
-                    'criteria'  => $criteria,
-                    'pagination' => array('pageSize'=>20),
-                )
-            );
-
+            $results = Prs::search($query);
             $this->render('search',array(
-                    'dataProvider'=>$dataProvider,
+                    'result'=>$results['results'],
                     'query'=>$query,
             ));
         }
@@ -119,11 +112,11 @@ class SiteController extends Controller
 
     public function actionPerson()
     {
-        if(isset($_GET['id']) && ($keyword=trim($_GET['id']))!=='')
+        if(isset($_GET['id']))
         {
             $id = $_GET['id'];
-            $person = People::model()->findbyPk($id);
-
+            $instance = Prs::init();
+            $person = $instance->get('person', $id);
             $this->render('person', array('person' => $person));
         }
     }
