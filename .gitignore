@@ -2,3 +2,4 @@ assets/
 protected/runtime/
 themes/classic/views/
 protected/config/
+protected/extensions/
