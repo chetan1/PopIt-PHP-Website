@@ -120,7 +120,7 @@ class People extends CActiveRecord
 
     public static function getSyncFields()
     {
-        return array('house', 'state', 'party', 'education', 'educationDetails', 'constituency', 'age', 'gender', 'debates', 'bills', 'questions', 'attendance', 'termStart', 'termEnd', 'nature');
+        return array('name', 'house', 'state', 'party', 'education', 'educationDetails', 'constituency', 'age', 'gender', 'debates', 'bills', 'questions', 'attendance', 'termStart', 'termEnd', 'nature', 'notes');
     }
 
     public static function getSearchFields()
@@ -170,7 +170,7 @@ class People extends CActiveRecord
             return "Female";
     }
 
-    public function getExtraData()
+    public function getSyncData()
     {
         $fields = self::getSyncFields();
         $result = array();
@@ -178,6 +178,8 @@ class People extends CActiveRecord
         foreach($fields as $f)
             $result[$f] = $this->$f;
 
+        $result['links'] = $this->getLinks();
+        
         return $result;
     }
 

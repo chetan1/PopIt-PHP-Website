@@ -15,29 +15,26 @@ class Prs{
         
         foreach($people as $p)
         {
-            if(isset($storedData['organisation'][$p->house]))
-                $orgId = $storedData['organisation'][$p->house];
-            else
+            if(!isset($storedData['person'][$p->name]))
             {
-                $call = $popit->add('organisation', array('name' => $p->house));
-                $orgId = $call['_id'];
-                $storedData['organisation'][$p->house] = $orgId;
+                if(isset($storedData['organisation'][$p->house]))
+                    $orgId = $storedData['organisation'][$p->house];
+                else
+                {
+                    $call = $popit->add('organisation', array('name' => $p->house));
+                    $orgId = $call['_id'];
+                    $storedData['organisation'][$p->house] = $orgId;
+                }
+
+                $links =  $p->getLinks();
+
+                $person = $popit->add('person', $p->getSyncData());
+                $position = $popit->add('position', array(
+                    'title' => 'Member of ' . $p->house,
+                    'person' => $person['_id'],
+                    'organisation' => $orgId,
+                ));
             }
-
-            $links =  $p->getLinks();
-
-            $person = $popit->add('person', array(
-                'name' => $p->name,
-                'summary' => json_encode($p->getExtraData()),
-                'links' => $links,
-                
-            ));
-
-            $position = $popit->add('position', array(
-                'title' => 'Member of ' . $p->house,
-                'person' => $person['_id'],
-                'organisation' => $orgId,
-            ));
         }
     }
 

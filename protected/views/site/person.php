@@ -3,15 +3,15 @@
     <div class="span8">
         <div class="hero-unit" id="person-profile">
             <h1>
-                <?= $person['name'] ?> <span class="small"><i>(<?= $person['summary']['age'] ?>, <?= $person['summary']['gender'] ?>)</i></small>
+                <?= $person['name'] ?> <span class="small"><i>(<?= $person['age'] ?>, <?= $person['gender'] ?>)</i></small>
                     <div class="shr_classic shareaholic-show-on-load" style="float:right;"></div>
             </h1>
-            <h2><?= $person['summary']['house'] ?> - <i>
-                <?= $person['summary']['nature'] ?>
+            <h2><?= $person['house'] ?> - <i>
+                <?= $person['nature'] ?>
                 <? if($person->constituency != ''): ?>
                     from 
-                    <a href="<?=  $this->createAbsoluteUrl('site/search', array('q' => $person['summary']['constituency'])) ?>">
-                        <?= $person['summary']['constituency'] ?>
+                    <a href="<?=  $this->createAbsoluteUrl('site/search', array('q' => $person['constituency'])) ?>">
+                        <?= $person['constituency'] ?>
                     </a>
                 <? endif; ?>
             </i></h2>
@@ -21,8 +21,8 @@
                     Education
                 </div>
                 <div class="profile-section-content">
-                    <a href="<?=  $this->createAbsoluteUrl('site/search', array('q' => $person['summary']['education'])) ?>"><?= $person['summary']['education'] ?></a>,
-                    <?= $person['summary']['educationDetails'] ?>
+                    <a href="<?=  $this->createAbsoluteUrl('site/search', array('q' => $person['education'])) ?>"><?= $person['education'] ?></a>,
+                    <?= $person['educationDetails'] ?>
                 </div>
             </div>
 
@@ -32,14 +32,14 @@
                 </div>
                 <div class="profile-section-content">
                     <b>Party</b>:
-                    <a href="<?=  $this->createAbsoluteUrl('site/search', array('q' => $person['summary']['party'])) ?>">
-                        <?= $person['summary']['party'] ?>
+                    <a href="<?=  $this->createAbsoluteUrl('site/search', array('q' => $person['party'])) ?>">
+                        <?= $person['party'] ?>
                     </a><br />
                     <b>State</b>:
                     <a href="<?=  $this->createAbsoluteUrl('site/search', array('q' => $person->state)) ?>">
-                        <?= $person['summary']['state'] ?>
+                        <?= $person['state'] ?>
                     </a><br />
-                    <b>Term</b>: <?= $person['summary']['termStart'] ?> - <?= $person['summary']['termEnd'] ?><br />
+                    <b>Term</b>: <?= $person['termStart'] ?> - <?= $person['termEnd'] ?><br />
                 </div>
             </div>
 
@@ -48,10 +48,10 @@
                     Statistics
                 </div>
                 <div class="profile-section-content">
-                    <b>Bills</b>: <?= $person['summary']['bills'] ?><br />
-                    <b>Debates</b>: <?= $person['summary']['debates'] ?><br />
-                    <b>Questions</b>: <?= $person['summary']['questions'] ?><br />
-                    <b>Attendance</b>: <?= $person['summary']['attendance'] ?>%<br />
+                    <b>Bills</b>: <?= $person['bills'] ?><br />
+                    <b>Debates</b>: <?= $person['debates'] ?><br />
+                    <b>Questions</b>: <?= $person['questions'] ?><br />
+                    <b>Attendance</b>: <?= $person['attendance'] ?>%<br />
                 </div>
             </div>
 
@@ -60,7 +60,7 @@
                     Notes
                 </div>
                 <div class="profile-section-content">
-                    <?= $person['summary']['notes'] ?>
+                    <?= $person['notes'] ?>
                 </div>
             </div>
             <div class="profile-section">
