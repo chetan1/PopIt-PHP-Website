@@ -15,7 +15,7 @@ The site uses the Yii PHP framework for the backend and the Twitter bootsrap lib
 
 2. Get the PHP bindings for PopIt from [Github repo](https://github.com/mysociety/popit-php).
 
-3. Use the credentials used in (1) to initialize the PopIt object.
+3. Use the credentials used in (1) to initialize the PopIt object like [here](https://github.com/chetan1/PopIt-PHP-Website/blob/master/protected/components/PopIt/prs.php#L7).
 
 4. Use the PopIt object to read/insert/update/delete data on the PopIt site.
 
